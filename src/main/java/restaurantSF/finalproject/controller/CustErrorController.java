@@ -9,7 +9,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class CustomErrorController implements ErrorController {
+public class CustErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request) {
@@ -19,13 +19,17 @@ public class CustomErrorController implements ErrorController {
             Integer statusCode = Integer.valueOf(status.toString());
 
             if(statusCode == HttpStatus.NOT_FOUND.value()) {
-                return "error/404";
+                return "error/400";
             }
             else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
                 return "error/500";
             }
         }
         return "error/default";
+    }
+
+    public String getErrorPath() {
+        return "error";
     }
 
 }
