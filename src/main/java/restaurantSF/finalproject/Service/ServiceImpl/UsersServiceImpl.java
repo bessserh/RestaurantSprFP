@@ -1,8 +1,9 @@
-package restaurantSF.finalproject.Service;
+package restaurantSF.finalproject.Service.ServiceImpl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import restaurantSF.finalproject.DTO.UsersDTO;
+import restaurantSF.finalproject.Service.UsersService;
 import restaurantSF.finalproject.converters.UsersConverter;
 import restaurantSF.finalproject.entity.Users;
 import restaurantSF.finalproject.repository.UserRepository;
