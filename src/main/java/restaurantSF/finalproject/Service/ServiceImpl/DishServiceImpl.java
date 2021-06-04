@@ -61,5 +61,14 @@ public class DishServiceImpl implements DishService {
         return dishRepository.findAll(page);
     }
 
+    @Override
+    public List<Dishes> paginatedCategory(Page<Dishes> dishesPage, String category) {
+        List<Dishes> dishesCat = dishesPage.getContent()
+                .stream().filter(dishes1 -> dishes1.getCategory().toString()
+                .equalsIgnoreCase(category)).collect(Collectors.toList());
+
+        return dishesCat.isEmpty() ? dishesPage.getContent() : dishesCat;
+    }
+
 }
 

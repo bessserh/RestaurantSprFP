@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import restaurantSF.finalproject.Service.DishService;
 import restaurantSF.finalproject.Service.OrderService;
 import restaurantSF.finalproject.entity.Dishes;
+import restaurantSF.finalproject.entity.Enums.Category;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -27,7 +30,7 @@ public class MainPageController {
 
     @GetMapping(value = "/")
     public String mainPage(Model model) {
-        return mainPagePaging(1, "name", "asc", model);
+        return mainPagePaging(1, "name", "asc", "all", model);
     }
 
 
@@ -35,10 +38,12 @@ public class MainPageController {
     public String mainPagePaging(@PathVariable("pageNo") int pageNo,
                                  @RequestParam("sortField") String sortField,
                                  @RequestParam("sortDir") String sortDir,
+                                 @RequestParam("sortCat") String sortCat,
                                  Model model) {
-        int pageSize = 5;
+        int pageSize = 4;
         Page<Dishes> dishesPage = dishService.findPaginated(pageNo, pageSize, sortField, sortDir);
-        List<Dishes> dishes = dishesPage.getContent();
+
+        List<Dishes> dishes = dishService.paginatedCategory(dishesPage, sortCat);
 
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", dishesPage.getTotalPages());
@@ -46,6 +51,7 @@ public class MainPageController {
 
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
+        model.addAttribute("sortCat", sortCat);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
         model.addAttribute("dishes", dishes);

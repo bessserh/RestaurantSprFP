@@ -15,4 +15,6 @@ public interface DishService {
     List<DishDTO> findAll();
     Dishes findDishById(Integer id);
     Page<Dishes> findPaginated(int pageNum, int pageSize, String sortField, String sortDirection);
+
+    List<Dishes> paginatedCategory(Page<Dishes> dishesPage, String category);
 }
