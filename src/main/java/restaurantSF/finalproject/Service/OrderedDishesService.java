@@ -1,7 +1,6 @@
 package restaurantSF.finalproject.Service;
 
 import restaurantSF.finalproject.entity.OrderedDishes;
-
 import java.util.List;
 
 public interface OrderedDishesService {
