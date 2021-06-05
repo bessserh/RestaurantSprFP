@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor
-public class RegisterController {
+public class RegistrationController {
 
     private final UsersService usersService;
     private final UsersConverter usersConverter;

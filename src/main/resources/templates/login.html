@@ -35,23 +35,21 @@
 
 <div class="form-signin" style="margin-top: 10%">
     <form th:action="@{/login}" method="post" autocomplete="off">
-        <h1 class="h3 mb-3 fw-normal">Login</h1>
+        <h1 class="h3 mb-3 fw-normal" th:text="#{label.signIn}">Login</h1>
 
-        <label for="email">Login</label>
+        <label for="email" th:text="#{register.email}">Login</label>
         <input required
                name="email"
                type="text" id="email" class="form-control"
                th:placeholder="#{register.placeholder.email}">
 
-        <label for="password">Password</label>
+        <label for="password" th:text="#{register.Password}">Password</label>
         <input required
                name="password"
                type="password" id="password" class="form-control"
-               th:placeholder="#{register.placeholder.email}"
+               th:placeholder="#{register.placeholder.password}">
 
-        >
-
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" th:text="#{label.signIn}">Sign in</button>
 
         <div th:if="${param.error}">
             Invalid username and password.
