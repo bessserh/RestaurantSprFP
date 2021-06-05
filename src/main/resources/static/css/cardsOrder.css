@@ -15,6 +15,11 @@
     object-fit: contain;
 }
 
+.progressText {
+    font-size: large;
+    color: aliceblue;
+}
+
 
 .myfoot {
     margin-top: 2%;
