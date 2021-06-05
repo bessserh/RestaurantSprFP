@@ -35,7 +35,7 @@
                         <a sec:authorize="isAuthenticated()" th:href="@{/logout}" th:text="#{label.logout}"
                            class="btn btn-outline-success" style="background-color: firebrick"></a>
                         <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/adminPage}" th:text="#{label.adminPage}"
-                        class="btn btn-outline-success" style="background-color: brown"></a>
+                        class="btn btn-outline-success" style="background-color: #a843b8"></a>
                         <a sec:authorize="hasAuthority('USER')" th:href="@{/userCabinet}" th:text="#{label.userPage}"
                            class="btn btn-outline-success" style="background-color: gold"></a>
                     </div>

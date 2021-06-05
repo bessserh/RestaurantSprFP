@@ -25,8 +25,9 @@ public class AdminController {
 
 
     @GetMapping(value = "/adminPage")
-    public String adminPage(ModelMap model) {
+    public String adminPage(@AuthenticationPrincipal User userAuth, ModelMap model) {
         List<OrderDTO> orders = orderService.findAll();
+        model.addAttribute("admin", userAuth.getUsername());
         model.put("orders", orders);
         model.put("orders_dishes", orderedDishesService.findAllDishes());
         model.put("dishes", dishService.findAll());
