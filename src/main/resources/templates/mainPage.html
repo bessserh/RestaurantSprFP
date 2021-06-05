@@ -25,8 +25,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-left: 50%;">
-
+                <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-left: 40%;">
 
                     <div>
                         <a sec:authorize="!isAuthenticated()" th:href="@{/registration}" th:text="#{label.register}"
@@ -59,23 +58,27 @@
             <span th:text="#{sort} +': '" style="font-size: 30px">sort</span>
             <div class="dropdown show">
                 <a type="button" class="btn btn-lg btn-success"
-                   th:href="@{'/page/'+${currentPage}+ '?sortField=price&sortDir='+${reverseSortDir}+'&sortCat=all'}">All menu</a>
+                   th:href="@{'/page/'+${currentPage}+ '?sortField='+${sortField}+'&sortDir='+${reverseSortDir}+'&sortCat=all'}"
+                   th:text="#{menu.all}">All menu</a>
                 <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item"
-                       th:href="@{'/page/'+${currentPage}+ '?sortField=price&sortDir='+${reverseSortDir}+'&sortCat=first'}"
-                    >First</a>
+                       th:href="@{'/page/'+${currentPage}+ '?sortField='+${sortField}+'&sortDir='+${reverseSortDir}+'&sortCat=first'}"
+                        th:text="#{menu.first}">First</a>
                     <a class="dropdown-item"
-                       th:href="@{'/page/'+${currentPage}+ '?sortField=price&sortDir='+${reverseSortDir}+'&sortCat=pizza'}"
-                    >Pizza</a>
+                       th:href="@{'/page/'+${currentPage}+ '?sortField='+${sortField}+'&sortDir='+${reverseSortDir}+'&sortCat=pizza'}"
+                       th:text="#{menu.pizza}">Pizza</a>
                     <a class="dropdown-item"
-                       th:href="@{'/page/'+${currentPage}+ '?sortField=price&sortDir='+${reverseSortDir}+'&sortCat=sushi'}">Sushi</a>
+                       th:href="@{'/page/'+${currentPage}+ '?sortField='+${sortField}+'&sortDir='+${reverseSortDir}+'&sortCat=sushi'}"
+                       th:text="#{menu.sushi}">Sushi</a>
                     <a class="dropdown-item"
-                       th:href="@{'/page/'+${currentPage}+ '?sortField=price&sortDir='+${reverseSortDir}+'&sortCat=drinks'}">Drinks</a>
+                       th:href="@{'/page/'+${currentPage}+ '?sortField='+${sortField}+'&sortDir='+${reverseSortDir}+'&sortCat=drinks'}"
+                       th:text="#{menu.drinks}">Drinks</a>
                     <a class="dropdown-item"
-                       th:href="@{'/page/'+${currentPage}+ '?sortField=price&sortDir='+${reverseSortDir}+'&sortCat=dessert'}">Dessert</a>
+                       th:href="@{'/page/'+${currentPage}+ '?sortField='+${sortField}+'&sortDir='+${reverseSortDir}+'&sortCat=dessert'}"
+                       th:text="#{menu.dessert}">Dessert</a>
                 </div>
             </div>
             <div style="padding-left: 10px">

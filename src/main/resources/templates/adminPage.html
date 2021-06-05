@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+
+    <title th:text="#{page.admin}"></title>
 </head>
 <body>
-
+<h2 th:text="#{welcome}+', '+#{admin}"></h2>
+<div class="navigation">
+    <div class="reg">
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}" th:text="#{logout}"></a>
+        <a href="/"><p th:text="#{page.main}"></p></a>
+    </div>
+    <div class="lang">
+        <a href="?lang=en" th:text="#{lang.eng}"></a>
+        <a href="?lang=uk" th:text="#{lang.ukr}"></a>
+    </div>
+</div>
+<div class="table">
+    <table class="admin_table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th th:text="#{order.status}"></th>
+            <th th:text="#{order.creation}"></th>
+            <th th:text="#{order.update}"></th>
+            <th th:text="#{order.dishes}"></th>
+            <th th:text="#{order.status.update}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order: ${orders}" th:unless="${order.status.toString()=='MAKING'}">
+            <td th:text="${order.id}"/>
+            <td th:text="${order.status}"/>
+            <td th:text="${order.creationDate}"/>
+            <td th:text="${order.updateDate}"/>
+            <td>
+                <p th:each="dish: ${order.dishes}">
+                    <span th:text="${dish.name}"></span>
+                    <span th:each="order_dish: ${orders_dishes}">
+                        <span th:if="${order_dish.order_id == order.id && order_dish.dish_id == dish.id}">
+                            <span th:text="'('+${order_dish.amount}+')'"></span>
+                        </span>
+                    </span>
+                </p>
+            </td>
+            <td>
+                <a th:if="${order.status.id < 4}" th:href="@{/adminPage/next/{orderId}(orderId=${order.id})}" th:text="#{status.next}"></a>
+                <a th:if="${order.status.id < 4}" th:href="@{/adminPage/cancel/{orderId}(orderId=${order.id})}" th:text="#{status.cancel}"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

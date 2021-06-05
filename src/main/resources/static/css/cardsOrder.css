@@ -1,0 +1,22 @@
+.cardCont {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.eachCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.imageShow {
+    height: 200px;
+    width: auto;
+    object-fit: contain;
+}
+
+
+.myfoot {
+    margin-top: 2%;
+    background-color: cornsilk;
+}

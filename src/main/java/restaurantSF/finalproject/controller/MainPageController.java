@@ -57,10 +57,4 @@ public class MainPageController {
         model.addAttribute("dishes", dishes);
         return "mainPage";
     }
-
-    @GetMapping(value = "/task")
-    public String taskList(ModelMap model) {
-        model.put("users", orderService.findAll());
-        return "task";
-    }
 }
