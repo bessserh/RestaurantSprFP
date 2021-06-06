@@ -35,7 +35,9 @@
 
 <div class="form-signin" style="margin-top: 10%">
     <form th:action="@{/login}" method="post" autocomplete="off">
+        <div style="text-align: center">
         <h1 class="h3 mb-3 fw-normal" th:text="#{label.signIn}">Login</h1>
+        </div>
 
         <label for="email" th:text="#{register.email}">Login</label>
         <input required

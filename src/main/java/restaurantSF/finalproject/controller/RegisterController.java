@@ -1,7 +1,6 @@
 package restaurantSF.finalproject.controller;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,7 @@ import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor
-public class RegistrationController {
+public class RegisterController {
 
     private final UsersService usersService;
     private final UsersConverter usersConverter;
@@ -30,7 +29,7 @@ public class RegistrationController {
 
     @GetMapping(value = "/registration")
     public String registrationForm(Model model) {
-        model.addAttribute("userForm", new Users());
+        model.addAttribute("users", new Users());
         return "registration";
     }
 
@@ -40,7 +39,7 @@ public class RegistrationController {
         UsersDTO userFromDb = usersService.findByEmail(user.getEmail());
 
         if (userFromDb != null) {
-            model.addAttribute("message", "User exists!");
+            model.addAttribute("message", "exists");
             return "registration";
         }
 
@@ -51,10 +50,9 @@ public class RegistrationController {
             usersService.saveUser(usersConverter.fromUserToUserDto(user));
         }
         catch (ValidationException e) {
-            model.addAttribute("message", "Not valid");
+            model.addAttribute("message", "invalid");
             return "registration";
         }
-        return "redirect:/";
+        return "redirect:/login";
     }
-
 }

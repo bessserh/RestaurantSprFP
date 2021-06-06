@@ -32,10 +32,15 @@
 </header>
 
 <main class="form-signin">
-    <form th:action="@{/registration}" th:object="${userForm}" method="post">
-        <div align="center">
+    <form name="form" th:action="@{/registration}" th:object="${users}" method="post" autocomplete="off">
+        <div style="text-align: center">
             <h1 th:text="#{register.newUser}">New User</h1>
         </div>
+        <div th:if="${message}" style="text-align: center; color: red">
+            <span th:if="${message == 'exists'}" th:text="#{register.exists}">ex</span>
+            <span th:if="${message == 'invalid'}" th:text="#{register.invalid}">ex</span>
+        </div>
+
         <label for="inputEmail" th:text="#{register.email}">Email address</label>
         <input type="text" id="inputEmail" class="form-control" name="email"
                th:placeholder="#{register.placeholder.email}"
@@ -48,7 +53,7 @@
                required>
         <button class="w-100 btn btn-lg btn-primary" type="submit" th:text="#{register.submit}">REGISTRATION</button>
      </form>
-    <div th:if="${param.error}" th:text="${message}" style="font-size: large; color: red"> USER EXISTS </div>
+
 </main>
 
 </body>

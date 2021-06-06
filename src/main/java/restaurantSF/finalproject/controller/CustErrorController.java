@@ -28,10 +28,8 @@ public class CustErrorController implements ErrorController {
         return "error/default";
     }
 
-    //problem validRegistration here
-    //deprecated
+    @Deprecated
     public String getErrorPath() {
         return "error";
     }
-
 }
