@@ -10,10 +10,12 @@ import restaurantSF.finalproject.DTO.DishDTO;
 import restaurantSF.finalproject.Service.DishService;
 import restaurantSF.finalproject.converters.DishConverter;
 import restaurantSF.finalproject.entity.Dishes;
+import restaurantSF.finalproject.entity.Enums.Category;
 import restaurantSF.finalproject.errorValid.ValidationException;
 import restaurantSF.finalproject.repository.DishRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -55,19 +57,23 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public Page<Dishes> findPaginated(int pageNum, int pageSize, String sortField, String sortDirection) {
-        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
-                Sort.by(sortField).descending();
-        Pageable page = PageRequest.of(pageNum-1, pageSize, sort);
-        return dishRepository.findAll(page);
-    }
-    //todo optional list dishes
-    @Override
-    public List<Dishes> paginatedCategory(Page<Dishes> dishesPage, String category) {
-        List<Dishes> dishesCat = dishesPage.getContent()
-                .stream().filter(dishes1 -> dishes1.getCategory().toString()
-                .equalsIgnoreCase(category)).collect(Collectors.toList());
 
-        return dishesCat.isEmpty() ? dishesPage.getContent() : dishesCat;
+        return dishRepository.findAll(PageRequest.of(pageNum-1, pageSize,
+                sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
+                        Sort.by(sortField).ascending() :
+                        Sort.by(sortField).descending()));
+    }
+
+    @Override
+    public Page<Dishes> paginatedCategory(Category category, int pageNum, int pageSize,
+                                          String sortField, String sortDirection) {
+
+        return dishRepository.findAllByCategory(category,
+                PageRequest.of(pageNum-1, pageSize,
+                sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
+                        Sort.by(sortField).ascending() :
+                        Sort.by(sortField).descending()));
+
     }
 
 }

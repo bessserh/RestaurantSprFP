@@ -2,6 +2,7 @@ package restaurantSF.finalproject.controller;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,8 @@ import restaurantSF.finalproject.entity.Enums.Category;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -24,9 +27,8 @@ import java.util.stream.Collectors;
 @RequestMapping
 public class MainPageController {
 
-    private final DishService dishService;
-    private final OrderService orderService;
-
+    @Autowired
+    private DishService dishService;
 
     @GetMapping(value = "/")
     public String mainPage(Model model) {
@@ -41,9 +43,13 @@ public class MainPageController {
                                  @RequestParam("sortCat") String sortCat,
                                  Model model) {
         int pageSize = 4;
-        Page<Dishes> dishesPage = dishService.findPaginated(pageNo, pageSize, sortField, sortDir);
-
-        List<Dishes> dishes = dishService.paginatedCategory(dishesPage, sortCat);
+        Page <Dishes> dishesPage;
+        if(sortCat.equals("all")) {
+            dishesPage = dishService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        } else {
+            dishesPage = dishService.paginatedCategory(Category.valueOf(sortCat.toUpperCase()),
+                    pageNo, pageSize, sortField, sortDir);
+        }
 
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", dishesPage.getTotalPages());
@@ -54,7 +60,7 @@ public class MainPageController {
         model.addAttribute("sortCat", sortCat);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
-        model.addAttribute("dishes", dishes);
+        model.addAttribute("dishes", dishesPage);
         return "mainPage";
     }
 }

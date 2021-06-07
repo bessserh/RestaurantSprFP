@@ -3,9 +3,11 @@ package restaurantSF.finalproject.Service;
 import org.springframework.data.domain.Page;
 import restaurantSF.finalproject.DTO.DishDTO;
 import restaurantSF.finalproject.entity.Dishes;
+import restaurantSF.finalproject.entity.Enums.Category;
 import restaurantSF.finalproject.errorValid.ValidationException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DishService {
 
@@ -16,5 +18,6 @@ public interface DishService {
     Dishes findDishById(Integer id);
     Page<Dishes> findPaginated(int pageNum, int pageSize, String sortField, String sortDirection);
 
-    List<Dishes> paginatedCategory(Page<Dishes> dishesPage, String category);
+    Page<Dishes> paginatedCategory(Category category, int pageNum, int pageSize, String sortField,
+                                   String sortDirection);
 }
