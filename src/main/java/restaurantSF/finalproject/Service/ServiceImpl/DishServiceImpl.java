@@ -60,7 +60,7 @@ public class DishServiceImpl implements DishService {
         Pageable page = PageRequest.of(pageNum-1, pageSize, sort);
         return dishRepository.findAll(page);
     }
-
+    //todo optional list dishes
     @Override
     public List<Dishes> paginatedCategory(Page<Dishes> dishesPage, String category) {
         List<Dishes> dishesCat = dishesPage.getContent()
