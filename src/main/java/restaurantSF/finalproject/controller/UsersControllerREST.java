@@ -15,7 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 @Log
 @CrossOrigin
-public class UsersController {
+public class UsersControllerREST {
+
+    //TODO correct spring boot rest controller authentication
 
     private final UsersService usersService;
 
